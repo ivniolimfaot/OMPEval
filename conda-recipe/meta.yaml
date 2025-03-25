@@ -1,0 +1,42 @@
+package:
+  name: ompeval
+  version: "1.0.0"
+
+source:
+  git_rev: master
+  git_url: https://github.com/ivniolimfaot/OMPEval.git
+
+build:
+  number: 0
+  script_env:
+    - CMAKE_GENERATOR=MinGW Makefiles
+  skip: true  # [win and vc<14]
+
+requirements:
+  build:
+    - cmake
+    - make  # [not win]
+    - m2-make  # [win]
+    - {{ compiler('c') }}
+    - {{ compiler('cxx') }}
+    - m2w64-gcc  # [win]
+    - m2w64-toolchain  # [win]
+
+  host:
+    - libstdcxx-ng  # [linux]
+    - libcxx  # [osx]
+    
+  run:
+    - libstdcxx-ng  # [linux]
+    - libcxx  # [osx]
+    - m2w64-toolchain # [win]
+
+test:
+  commands:
+    - test -f $PREFIX/lib/libompeval.so  # [linux]
+    - if not exist %PREFIX%\lib\libompeval.dll exit 1  # [win]
+
+about:
+  home: "https://github.com/ivniolimfaot/OMPEval"
+  license: "MIT"
+  summary: "OMPEval is a C++ library for evaluating poker hands."

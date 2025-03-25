@@ -50,8 +50,8 @@ endif()
 
 # Install the library and headers to default directories (if needed)
 
-install(TARGETS ompeval DESTINATION bin)
-install(FILES $<TARGET_FILE:ompeval> DESTINATION bin)
+install(TARGETS ompeval DESTINATION lib)
+install(FILES $<TARGET_FILE:ompeval> DESTINATION lib)
 
 # Install the headers from the 'omp' directory into 'include'
 install(DIRECTORY omp/ DESTINATION ${CMAKE_INSTALL_PREFIX}/include FILES_MATCHING PATTERN "*.h")
